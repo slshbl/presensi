@@ -42,25 +42,52 @@
                     <h2 class="form-title">Send us a message</h2>
                     <div class="form-fields">
                         <div class="form-group">
-                            <input type="text" class="fname" placeholder="First Name">
+                            <input type="text" class="nama" placeholder="Nama">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="lname" placeholder="Last Name">
+                            <input type="text" class="sekolah" placeholder="Sekolah">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="email" placeholder="Mail">
+                            <input type="email" class="email" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <input type="number" class="phone" placeholder="Phone">
+                            <input type="number" class="no_hp" placeholder="No. HP">
                         </div>
                         <div class="form-group">
-                            <textarea name="message" id="" placeholder="Write your message"></textarea>
+                            <textarea name="message" class="pesan" placeholder="Tuliskan Pesan"></textarea>
                         </div>
                     </div>
-                    <input type="submit" value="Send Message" class="submit-button">
+                    <input type="submit" onclick="kirim()" value="Send Message" class="submit-button">
                 </form>
             </div>
         </div>
     </section>
+
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script>
+        function kirim() {
+        var nama = $('.nama').val(),
+            sekolah = $('.sekolah').val(),
+            no_hp = $('.no_hp').val(),
+            email = $('.email').val(),
+            pesan = $('.pesan').val(),
+        $.ajax({
+            url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd1c7XMNc37bs6PMg-C-ezwCjDSlz1JGVPBMKr2VDGv7b_0eA/formResponse",
+            data: {
+                "entry.1853689674": nama,
+                "entry.534825397": sekolah,
+                "entry.693461050": no_hp,
+                "entry.1257626441": email,
+                "entry.119553156": pesan
+            },
+            type: "POST",
+            dataType: "xml",
+            error: function() {
+                alert("Terima kasih telah mengisi presensi");
+                $('#contact').trigger('reset');
+            }
+        });
+        }
+    </script>
 </body>
 </html>
